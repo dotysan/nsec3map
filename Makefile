@@ -4,8 +4,15 @@ PY := 3.14.4
 VB := .venv/bin
 UV_BIN := $(shell command -v uv 2>/dev/null)
 
-$(VB)/n3map: $(VB)/activate |uv
+$(VB)/n3map: $(VB)/activate
 	@uv pip install --editable .[predict]
+
+.PHONY: tests
+tests: $(VB)/pytest
+	@uv run pytest --cov
+
+$(VB)/pytest: $(VB)/activate
+	@uv pip install .[test]
 
 $(VB)/activate: |uv
 	@uv venv --managed-python --python=$(PY)
@@ -14,8 +21,6 @@ $(VB)/activate: |uv
 uv:
 ifeq ($(UV_BIN),)
 	curl --location https://doty.org/gist/uv-install |bash
-else
-	@uv self update
 endif
 
 .PHONY: clean
