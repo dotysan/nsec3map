@@ -27,7 +27,7 @@ def hashcatify_main(argv):
             nsec3_hash = util.base32_ext_hex_encode(nsec3.hashed_owner).lower()
             nsec3_hash = nsec3_hash.decode()
             zone = str(nsec3.zone)
-            zone = re.sub('\.$', '', zone)
+            zone = re.sub(r'\.$', '', zone)
             iterations = "{0:d}".format(nsec3.iterations)
             salt = nsec3.salt.hex()
             out.write(":".join((nsec3_hash, "." + zone, salt, iterations))
