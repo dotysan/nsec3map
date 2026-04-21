@@ -39,6 +39,7 @@ classifiers = [
 
 [project.optional-dependencies]
 predict = [ "numpy", "scipy" ]
+test = [ "pytest", "pytest-cov" ]
 
 [project.scripts]
 n3map = 'n3map.map:main'
@@ -60,3 +61,12 @@ data-files = { 'share/man/man1' = [
                 'doc/n3map-hashcatify.1',
                 ] }
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["n3map"]
+omit = ["n3map/nsec3hash.c"]
+
+[tool.coverage.report]
+show_missing = true
