@@ -35,7 +35,7 @@ def _compute_query_interval(n, unit):
     return units[unit]/n
 
 def _query_interval(s):
-    p = re.compile('^(([0-9]\.|[1-9][0-9]*[.]?)[0-9]*)/([smh])$')
+    p = re.compile(r'^(([0-9]\.|[1-9][0-9]*[.]?)[0-9]*)/([smh])$')
     m = p.match(s)
     if m is None:
         raise ValueError
